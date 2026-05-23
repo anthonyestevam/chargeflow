@@ -202,6 +202,7 @@ Recomenda-se:
 * [ ] Exportação de logs
 * [ ] Executável Linux/Windows
 * [ ] Dashboard de métricas
+* [ ] Arquivo com os tipos de mensagens que serão enviadas
 
 ---
 
