@@ -41,8 +41,6 @@ mensagens = [
 
 """Oi {nome}, tudo bem?
 
-Sou Anthony do financeiro da Bestlaser.
-
 Percebi um atraso em seu contrato.
 
 Para facilitar, segue o link:
@@ -61,16 +59,12 @@ Segue o link para regularização:
 
 """Olá {nome}, tudo certo?
 
-Aqui é o Anthony do financeiro da Bestlaser 😊
-
 Identificamos um valor pendente em seu contrato.
 
 Posso te enviar o link para regularização caso queira.
 """,
 
 """Oi {nome}, espero que esteja bem!
-
-Sou Anthony do financeiro da Bestlaser.
 
 Notei um atraso em aberto.
 
