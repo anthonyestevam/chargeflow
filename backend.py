@@ -30,16 +30,27 @@ time.sleep(25)
 enviados = 0
 arquivo = sys.argv[1]
 
-df = pd.read_csv(
-    arquivo,
-    sep=";",
-    encoding="utf-8"
-)
+try:
+    df = pd.read_csv(
+        arquivo,
+        sep=";",
+        encoding="utf-8"
+    )
+
+except pd.errors.EmptyDataError:
+    print("❌ O arquivo CSV está vazio.")
+    exit()
+
+except Exception as e:
+    print(f"❌ Erro ao ler CSV: {e}")
+    exit()
 clientes_chamados = set()
 
 mensagens = [
 
 """Oi {nome}, tudo bem?
+
+Sou Anthony do financeiro da Bestlaser.
 
 Percebi um atraso em seu contrato.
 
@@ -59,12 +70,16 @@ Segue o link para regularização:
 
 """Olá {nome}, tudo certo?
 
+Aqui é o Anthony do financeiro da Bestlaser 😊
+
 Identificamos um valor pendente em seu contrato.
 
 Posso te enviar o link para regularização caso queira.
 """,
 
 """Oi {nome}, espero que esteja bem!
+
+Sou Anthony do financeiro da Bestlaser.
 
 Notei um atraso em aberto.
 

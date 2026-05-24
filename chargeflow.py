@@ -1,7 +1,11 @@
-import tkinter as tk
-from tkinter import filedialog, scrolledtext
+import customtkinter as ctk
+from tkinter import filedialog
 import threading
 import subprocess
+
+# ===== TEMA =====
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("blue")
 
 # ===== VARIÁVEIS =====
 arquivo_csv = ""
@@ -20,7 +24,7 @@ def selecionar_csv():
 
     if caminho:
         arquivo_csv = caminho
-        label_csv.config(text=caminho)
+        label_csv.configure(text=caminho)
 
 # ===== ESCOLHER TXT =====
 def selecionar_bloqueados():
@@ -33,40 +37,14 @@ def selecionar_bloqueados():
 
     if caminho:
         arquivo_bloqueados = caminho
-        label_bloqueados.config(text=caminho)
+        label_bloqueados.configure(text=caminho)
 
-# ===== ESCREVER NO LOG =====
+# ===== ESCREVER LOG =====
 def adicionar_log(texto):
-    logs.insert(tk.END, texto + "\n")
-    logs.see(tk.END)
+    logs.insert("end", texto + "\n")
+    logs.see("end")
 
-# ===== EXECUTAR BOT =====
-def iniciar_cobranca():
-
-    global executando
-
-    if executando:
-        cancelar_cobranca()
-        return
-
-    if not arquivo_csv:
-        adicionar_log("❌ Selecione o arquivo CSV")
-        return
-
-    if not arquivo_bloqueados:
-        adicionar_log("❌ Selecione o arquivo de bloqueados")
-        return
-
-    executando = True
-
-    btn_iniciar.config(
-        text="Cancelar",
-        bg="red"
-    )
-
-    thread = threading.Thread(target=executar_script)
-    thread.start()
-    
+# ===== CANCELAR =====
 def cancelar_cobranca():
 
     global processo
@@ -75,21 +53,23 @@ def cancelar_cobranca():
     if processo:
         processo.terminate()
 
-    adicionar_log("🛑 Cobrança cancelada")
-
     executando = False
 
-    btn_iniciar.config(
+    adicionar_log("🛑 Cobrança cancelada")
+
+    btn_iniciar.configure(
         text="Iniciar Cobrança",
-        bg="green"
+        fg_color="green",
+        hover_color="#166534"
     )
 
-# ===== RODAR SCRIPT =====
+# ===== EXECUTAR SCRIPT =====
 def executar_script():
 
-    adicionar_log("🚀 Iniciando cobrança...")
     global processo
     global executando
+
+    adicionar_log("🚀 Iniciando cobrança...")
 
     processo = subprocess.Popen(
         [
@@ -108,77 +88,142 @@ def executar_script():
         adicionar_log(linha.strip())
 
     adicionar_log("🏁 Processo finalizado")
+
     executando = False
 
-    btn_iniciar.config(
+    btn_iniciar.configure(
         text="Iniciar Cobrança",
-        bg="green"
-)
+        fg_color="green",
+        hover_color="#166534"
+    )
+
+# ===== INICIAR =====
+def iniciar_cobranca():
+
+    global executando
+
+    if executando:
+        cancelar_cobranca()
+        return
+
+    if not arquivo_csv:
+        adicionar_log("❌ Selecione o arquivo CSV")
+        return
+
+    if not arquivo_bloqueados:
+        adicionar_log("❌ Selecione o arquivo de bloqueados")
+        return
+
+    executando = True
+
+    btn_iniciar.configure(
+        text="Cancelar",
+        fg_color="red",
+        hover_color="#991b1b"
+    )
+
+    thread = threading.Thread(target=executar_script)
+    thread.start()
 
 # ===== JANELA =====
-janela = tk.Tk()
-janela.title("Cobrador WhatsApp")
-janela.geometry("800x600")
+janela = ctk.CTk()
+janela.title("ChargeFlow")
+janela.geometry("900x650")
 
 # ===== TÍTULO =====
-titulo = tk.Label(
+titulo = ctk.CTkLabel(
     janela,
-    text="Sistema de Cobrança via WhatsApp",
+    text="ChargeFlow",
+    font=("Arial", 30, "bold")
+)
+
+titulo.pack(pady=(20,5))
+
+subtitulo = ctk.CTkLabel(
+    janela,
+    text="Sistema de automação de cobranças via WhatsApp",
+    font=("Arial", 14)
+)
+
+subtitulo.pack(pady=(0,20))
+
+# ===== CARD =====
+frame = ctk.CTkFrame(
+    janela,
+    corner_radius=15
+)
+
+frame.pack(fill="both", expand=True, padx=20, pady=10)
+
+# ===== BOTÃO CSV =====
+btn_csv = ctk.CTkButton(
+    frame,
+    text="Selecionar inadimplentes.csv",
+    command=selecionar_csv,
+    height=45,
+    corner_radius=12,
+    font=("Arial", 14, "bold")
+)
+
+btn_csv.pack(fill="x", padx=20, pady=(20,8))
+
+label_csv = ctk.CTkLabel(
+    frame,
+    text="Nenhum arquivo selecionado"
+)
+
+label_csv.pack(anchor="w", padx=25)
+
+# ===== BOTÃO BLOQUEADOS =====
+btn_bloqueados = ctk.CTkButton(
+    frame,
+    text="Selecionar bloqueados.txt",
+    command=selecionar_bloqueados,
+    height=45,
+    corner_radius=12,
+    font=("Arial", 14, "bold")
+)
+
+btn_bloqueados.pack(fill="x", padx=20, pady=(20,8))
+
+label_bloqueados = ctk.CTkLabel(
+    frame,
+    text="Nenhum arquivo selecionado"
+)
+
+label_bloqueados.pack(anchor="w", padx=25)
+
+# ===== BOTÃO INICIAR =====
+btn_iniciar = ctk.CTkButton(
+    frame,
+    text="Iniciar Cobrança",
+    command=iniciar_cobranca,
+    height=50,
+    corner_radius=14,
+    font=("Arial", 16, "bold"),
+    fg_color="green",
+    hover_color="#166534"
+)
+
+btn_iniciar.pack(fill="x", padx=20, pady=25)
+
+# ===== LOGS =====
+logs_label = ctk.CTkLabel(
+    frame,
+    text="Logs em tempo real",
     font=("Arial", 16, "bold")
 )
 
-titulo.pack(pady=10)
+logs_label.pack(anchor="w", padx=20)
 
-# ===== BOTÃO CSV =====
-btn_csv = tk.Button(
-    janela,
-    text="Selecionar inadimplentes.csv",
-    command=selecionar_csv,
-    width=30,
-    height=2
+logs = ctk.CTkTextbox(
+    frame,
+    height=300,
+    corner_radius=12,
+    font=("Consolas", 12)
 )
 
-btn_csv.pack(pady=5)
-
-label_csv = tk.Label(janela, text="Nenhum arquivo selecionado")
-label_csv.pack()
-
-# ===== BOTÃO BLOQUEADOS =====
-btn_bloqueados = tk.Button(
-    janela,
-    text="Selecionar bloqueados.txt",
-    command=selecionar_bloqueados,
-    width=30,
-    height=2
-)
-
-btn_bloqueados.pack(pady=10)
-
-label_bloqueados = tk.Label(janela, text="Nenhum arquivo selecionado")
-label_bloqueados.pack()
-
-# ===== BOTÃO INICIAR =====
-btn_iniciar = tk.Button(
-    janela,
-    text="Iniciar Cobrança",
-    command=iniciar_cobranca,
-    bg="green",
-    fg="white",
-    width=25,
-    height=2
-)
-
-btn_iniciar.pack(pady=20)
-
-# ===== ÁREA DE LOG =====
-logs = scrolledtext.ScrolledText(
-    janela,
-    width=95,
-    height=20,
-    font=("Consolas", 10)
-)
-
-logs.pack(padx=10, pady=10)
+logs.pack(fill="both", expand=True, padx=20, pady=(10,20))
 
 # ===== LOOP =====
 janela.mainloop()
