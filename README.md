@@ -1,4 +1,4 @@
-# 🚀 COBRADOR: Sistema de Cobrança Automática via WhatsApp
+# 🚀 CHARGEFLOW: Sistema de Cobrança Automática via WhatsApp
 
 Automação desenvolvida em Python para facilitar cobranças via WhatsApp Web utilizando planilhas CSV de inadimplentes.
 
@@ -30,9 +30,9 @@ O sistema permite:
 # 📂 Estrutura do Projeto
 
 ```bash
-/cobrador/
+/chargeflow/
 │
-├── cobrador.py
+├── chargeflow.py
 ├── backend.py
 ├── bloqueados.txt
 ├── inadimplentes.csv
@@ -57,7 +57,7 @@ O sistema permite:
 ## 1️⃣ Clone o repositório
 
 ```bash
-git clone https://github.com/anthonyestevam/cobrador.git
+git clone https://github.com/anthonyestevam/chargeflow.git
 ```
 
 ---
@@ -65,7 +65,7 @@ git clone https://github.com/anthonyestevam/cobrador.git
 ## 2️⃣ Entre na pasta
 
 ```bash
-cd cobrador
+cd chargeflow
 ```
 
 ---
@@ -103,7 +103,7 @@ sudo dnf install python3-tkinter
 # ▶️ Como executar
 
 ```bash
-python3 cobrador.py
+python3 chargeflow.py
 ```
 
 ---
