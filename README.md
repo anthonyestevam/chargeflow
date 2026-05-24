@@ -24,6 +24,8 @@ O sistema permite:
 * Seleção do TXT de bloqueados
 * Botão iniciar/cancelar
 * Logs em tempo real
+  
+  https://github.com/user-attachments/assets/d1008dc7-c225-4981-a3f5-ccfe780641a9
 
 ---
 
