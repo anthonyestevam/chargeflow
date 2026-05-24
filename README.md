@@ -198,7 +198,6 @@ Recomenda-se:
 # 📌 Funcionalidades Futuras
 
 * [ ] Barra de progresso
-* [ ] Tema dark
 * [ ] Exportação de logs
 * [ ] Executável Linux/Windows
 * [ ] Dashboard de métricas
