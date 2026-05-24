@@ -5,7 +5,7 @@ Automação desenvolvida em Python para facilitar cobranças via WhatsApp Web ut
 O sistema permite:
 
 * ✅ Envio automático de mensagens
-* ✅ Interface gráfica simples
+* ✅ Interface intuitiva
 * ✅ Seleção dinâmica de arquivos
 * ✅ Controle de clientes bloqueados
 * ✅ Evitar cobranças duplicadas
@@ -46,7 +46,7 @@ O sistema permite:
 * Python 3
 * Selenium
 * Pandas
-* Tkinter
+* CustomTkinter
 * WhatsApp Web
 * WebDriver Manager
 
@@ -97,6 +97,11 @@ Fedora:
 ```bash
 sudo dnf install python3-tkinter
 ```
+## 4️⃣ Instale o CustomTkinter
+
+```bash
+pip install customtkinter
+```
 
 ---
 
@@ -115,8 +120,6 @@ O sistema espera um CSV contendo colunas como:
 ```text
 Nome Cliente
 Telefone Cliente
-Valor em Atraso
-Dias de Atraso
 Link para Pagamento
 ```
 
