@@ -37,7 +37,7 @@ try:
     df = pd.read_csv(
         arquivo,
         sep=";",
-        encoding="latin1"
+        encoding="utf-8"
 )
 
     df.columns = df.columns.str.strip()
