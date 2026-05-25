@@ -74,6 +74,7 @@ def executar_script():
     processo = subprocess.Popen(
         [
             "python3",
+            "-u",
             "backend.py",
             arquivo_csv,
             arquivo_bloqueados

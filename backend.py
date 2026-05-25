@@ -43,11 +43,11 @@ try:
     df.columns = df.columns.str.strip()
 
 except pd.errors.EmptyDataError:
-    print("❌ O arquivo CSV está vazio.")
+    print("❌ O arquivo CSV está vazio.", flush=True)
     exit()
 
 except Exception as e:
-    print(f"❌ Erro ao ler CSV: {e}")
+    print(f"❌ Erro ao ler CSV: {e}", flush=True)
     exit()
     
 clientes_chamados = set()
@@ -55,6 +55,8 @@ clientes_chamados = set()
 mensagens = [
 
 """Oi {nome}, tudo bem?
+
+Sou Anthony do financeiro da Bestlaser.
 
 Percebi um atraso em seu contrato.
 
@@ -74,12 +76,16 @@ Segue o link para regularização:
 
 """Olá {nome}, tudo certo?
 
+Aqui é o Anthony do financeiro da Bestlaser 😊
+
 Identificamos um valor pendente em seu contrato.
 
 Posso te enviar o link para regularização caso queira.
 """,
 
 """Oi {nome}, espero que esteja bem!
+
+Sou Anthony do financeiro da Bestlaser.
 
 Notei um atraso em aberto.
 
@@ -114,12 +120,12 @@ for index, cliente in df.iterrows():
     
     # verificar bloqueados
     if telefone in bloqueados:
-        print(f"🚫 {nome} está na lista de bloqueados. Pulando...")
+        print(f"🚫 {nome} está na lista de bloqueados. Pulando...", flush=True)
         continue
     
     # evitar envio duplicado
     if telefone in clientes_chamados:
-        print(f"⚠️ {nome} já foi cobrado. Pulando...")
+        print(f"⚠️ {nome} já foi cobrado. Pulando...", flush=True)
         continue
         
     link = str(cliente['Link para Pagamento'])
@@ -158,13 +164,13 @@ for index, cliente in df.iterrows():
         caixa.send_keys(Keys.ENTER)
         clientes_chamados.add(telefone)
 
-        print(f"✅ Enviado para {nome}")
+        print(f"✅ Enviado para {nome}", flush=True)
         enviados += 1
-        print(f"📊 Total enviados:{enviados}")
+        print(f"📊 Total enviados:{enviados}", flush=True)
 
         time.sleep(random.uniform(25,45))
 
     except Exception as e:
-        print(f"❌ Erro com {nome} -> {e}")
+        print(f"❌ Erro com {nome} -> {e}", flush=True)
 
-print("Cobrança finalizada!")
+print("Cobrança finalizada!", flush=True)
