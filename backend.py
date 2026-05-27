@@ -56,6 +56,8 @@ mensagens = [
 
 """Oi {nome}, tudo bem?
 
+Sou Anthony do financeiro da Bestlaser.
+
 Percebi um atraso em seu contrato.
 
 Para facilitar, segue o link:
@@ -68,18 +70,18 @@ Caso já tenha realizado o pagamento, desconsidere esta mensagem.
 
 Gostaria de conversar sobre o seu contrato, que atualmente está com um atraso.
 
-Segue o link para regularização:
-{link}
 """,
 
 """Olá {nome}, tudo certo?
 
+Aqui é o Anthony do financeiro da Bestlaser 😊
 Identificamos um valor pendente em seu contrato.
-
 Posso te enviar o link para regularização caso queira.
 """,
 
 """Oi {nome}, espero que esteja bem!
+
+Sou Anthony do financeiro da Bestlaser.
 
 Notei um atraso em aberto.
 
@@ -94,6 +96,10 @@ Passando para informar que seu contrato possui um valor em aberto.
 Posso te enviar o link para regularização caso queira.
 
 Se já realizou o pagamento, pode desconsiderar esta mensagem.
+""",
+
+""" Oi {nome}, tudo bem ? Sou Anthony do financeiro da Bestlaser,
+estou entrando em contato, referente ao seu contrato em atraso.
 """
 ]
 # ===== CLIENTES BLOQUEADOS =====
@@ -141,7 +147,7 @@ for index, cliente in df.iterrows():
 
     driver.get(url)
 
-    time.sleep(random.uniform(12,18))
+    time.sleep(random.uniform(26,45))
 
     try:
         caixa = WebDriverWait(driver, 30).until(
@@ -153,7 +159,7 @@ for index, cliente in df.iterrows():
             )
         )
 
-        time.sleep(random.uniform(1,3))
+        time.sleep(random.uniform(38,55))
 
         caixa.send_keys(Keys.ENTER)
         clientes_chamados.add(telefone)
