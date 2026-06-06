@@ -143,7 +143,11 @@ for index, cliente in df.iterrows():
 
     url = f"https://web.whatsapp.com/send?phone=55{telefone}&text={mensagem}"
 
-    driver.get(url)
+    try:
+        driver.get(url)
+    except Exception as e:
+        print(f"❌ Erro ao abrir conversa de {nome}: {e}", flush=True)
+        continue
 
     time.sleep(random.uniform(26,45))
 
