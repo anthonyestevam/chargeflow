@@ -56,6 +56,8 @@ mensagens = [
 
 """Oi {primeiro_nome}, tudo bem?
 
+Sou Anthony do financeiro da Bestlaser.
+
 Percebi um atraso em seu contrato.
 
 Para facilitar, segue o link:
@@ -72,11 +74,14 @@ Gostaria de conversar sobre o seu contrato, que atualmente está com um atraso.
 
 """Olá {primeiro_nome}, tudo certo?
 
+Aqui é o Anthony do financeiro da Bestlaser 😊
 Identificamos um valor pendente em seu contrato.
 Posso te enviar o link para regularização caso queira.
 """,
 
 """Oi {primeiro_nome}, espero que esteja bem!
+
+Sou Anthony do financeiro da Bestlaser.
 
 Notei um atraso em aberto.
 
@@ -93,7 +98,7 @@ Posso te enviar o link para regularização caso queira.
 Se já realizou o pagamento, pode desconsiderar esta mensagem.
 """,
 
-""" Oi {primeiro_nome}, tudo bem ?
+""" Oi {primeiro_nome}, tudo bem ? Sou Anthony do financeiro da Bestlaser,
 estou entrando em contato, referente ao seu contrato em atraso.
 """
 ]
@@ -165,7 +170,9 @@ for index, cliente in df.iterrows():
         print(f"✅ Enviado para {nome}", flush=True)
         enviados += 1
         print(f"📊 Total enviados:{enviados}", flush=True)
-
+        
+        time.sleep(random.uniform(2,6))
+        caixa.send_keys(Keys.ESCAPE)
         time.sleep(random.uniform(25,45))
 
     except Exception as e:
